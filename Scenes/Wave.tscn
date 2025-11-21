@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://nt0l4pdapfwa"]
+
+[ext_resource type="Texture2D" uid="uid://dlxeyxe8ke6rt" path="res://Assets/waveProto.png" id="1_y54vu"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(82, -513)
+texture = ExtResource("1_y54vu")
