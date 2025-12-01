@@ -5,8 +5,8 @@
   ## Game
   Code in the game section handles Spawning of waves and  some basic timers logic, before settling on how to manage collisons with wave I had planned to handle it hear
   I am paritcularly pleased with the wave spawnign functions as the guide i was orignally followed was a very simplistic version that went by each spawn point node by node with variables for each node and wave that was spawned at the node inside the For loop,
-
-    ### example
+ ### example 1: old code
+ 
     for i in amount:
       var wave1 = wave.instantiate()
       wave1.global_postion = wave_spawn1.global_position
@@ -14,6 +14,34 @@
       wave2.global_position = wave_spawn2.global_position
       ....
   I decided to replace this with a nested for loop that used the "get_nodes_in_group" and the groups i organised the spawns points with to more cleanly spawn the waves, later ealised i could seperate the loop out into its own fuction and reuse it allowing me to call it for     each direction and achieve the same effect with less code in tidier fashion
+  ### example 2: resuable loop
+
+    func spawn_wave(amount, spawn_point, wait_between_waves):
+	    if spawn_point == "north":
+		    wavespawnloop("NorthSpawns", amount, wait_between_waves)	
+	    if spawn_point == "south":
+		    wavespawnloop("SouthSpawns", amount, wait_between_waves)
+	    if spawn_point == "west":
+		    wavespawnloop("WestSpawns", amount, wait_between_waves)
+	    if spawn_point == "east":
+		    wavespawnloop("EastSpawns", amount, wait_between_waves)
+
+    func wavespawnloop(origin, amount, wave_timer):
+	    var spawns = get_tree().get_nodes_in_group(origin)
+	    var current_wave_number: int = 1 
+	    for i in amount:
+		    for point in spawns:
+			    current_wave_number += 1
+			    var new_wave = wave.instantiate()
+			    new_wave.global_position = point.global_position
+			    add_child(new_wave)
+			    print("Spawning wave at: ", point.name, " wave number: ", current_wave_number)
+			    if point == spawns.back():
+				    break
+		    amount -= 1
+		    await get_tree().create_timer(wave_timer).timeout
+
+  I also realise this could all be folded into a single line of code if i rename the wave spawn point groups or ensure that the "spawn_point" varaible fed too spawn_wave is the correct string name for the wave spawn groups
   ## Game Manager
   created to handle damaging collisions with rocks initially, may be removed in later on should I change the rocks to be rigidBodies inorder
   ## Boat
