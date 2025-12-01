@@ -33,20 +33,10 @@ func prepare_spawn(origin, multiplier, timeBetween):
 
 func spawn_wave(amount, spawn_point, wait_between_waves):
 	if spawn_point == "north":
-		var north_spawns = get_tree().get_nodes_in_group("NorthSpawns")
-		var current_wave_number: int = 1
-		if amount >=1:
-			for i in amount:
-				for point in north_spawns:
-					current_wave_number += 1
-					var new_wave = wave.instantiate()
-					new_wave.global_position = point.global_position
-					add_child(new_wave)
-					print("Spawning wave at: ", point.name, " wave number: ", current_wave_number)
-					if point == north_spawns.back():
-						break
-				amount -= 1
-				await get_tree().create_timer(wait_between_waves).timeout
+		wavespawnloop("NorthSpawns", amount, wait_between_waves)
+		# this orignally would go through the spawn point swithout a for loop so would have each spawnpoint have its own variable
+		# and then spawn a wave add it trhough its own variable, i replaced this with a for loop that utilised get_nodes_in_group to make a cleaner code
+		# that achieved the same effect.
 	if spawn_point == "south":
 		var south_spawns = get_tree().get_nodes_in_group("SouthSpawns")
 		var current_wave_number: int = 1
@@ -92,6 +82,20 @@ func spawn_wave(amount, spawn_point, wait_between_waves):
 						break
 				amount -= 1
 				await get_tree().create_timer(wait_between_waves).timeout
+func wavespawnloop(origin, amount, wave_timer):
+	var spawns = get_tree().get_nodes_in_group(origin)
+	var current_wave_number: int = 1 
+	for i in amount:
+		for point in spawns:
+			current_wave_number += 1
+			var new_wave = wave.instantiate()
+			new_wave.global_position = point.global_position
+			add_child(new_wave)
+			print("Spawning wave at: ", point.name, " wave number: ", current_wave_number)
+			if point == spawns.back():
+				break
+		amount -= 1
+		await get_tree().create_timer(wave_timer).timeout
 
 func _on_timer_timeout() -> void:
 	get_tree().reload_current_scene()
