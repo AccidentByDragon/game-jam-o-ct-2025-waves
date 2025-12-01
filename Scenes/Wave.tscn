@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://nt0l4pdapfwa"]
 
 [ext_resource type="Texture2D" uid="uid://dlxeyxe8ke6rt" path="res://Assets/waveProto.png" id="1_y54vu"]
-[ext_resource type="Script" uid="uid://d33qjh6o08xsc" path="res://Scripts/waveCollision.gd" id="2_rvxmi"]
+[ext_resource type="Script" uid="uid://d33qjh6o08xsc" path="res://Scripts/wave_logic.gd" id="2_rvxmi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y54vu"]
 size = Vector2(300, 250.5)
 
-[node name="Wave" type="Area2D"]
+[node name="Wave" type="CharacterBody2D"]
 script = ExtResource("2_rvxmi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var rotation_speed = 1.5
 var CurrentSpeed: float
 var rotation_direction = 0
+const collision_force: float = 125.0
 
 func _physics_process(delta: float) -> void:
 	#move forward in facing direction
