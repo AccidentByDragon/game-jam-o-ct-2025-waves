@@ -4,7 +4,7 @@
 # Scripts & Code
   ## Game
   Code in the game section handles Spawning of waves and  some basic timers logic, before settling on how to manage collisons with wave I had planned to handle it hear
-  I am paritcularly pleased with the wave spawnign functions as the guide i was orignally followed was a very simplistic version that went by each spawn point node by node with variables for each node and wave that was spawned at the node inside the For loop,
+  I am paritcularly pleased with the wave spawning functions as the guide I was orignally followed was a very simplistic version that went by each spawn point node by node with variables for each node and wave that was spawned at the node inside the For loop,
   I quickly realised a for loop could achieve this effect and be more resuable
  ### example 1: guide code (shortened for simplicity)
  
