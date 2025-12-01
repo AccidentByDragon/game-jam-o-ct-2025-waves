@@ -15,7 +15,7 @@
       wave2.global_position = wave_spawn2.global_position
       ....
   I decided to replace this with a nested for loop that used the "get_nodes_in_group" and the groups i organised the spawns points with to more cleanly spawn the waves, later ealised i could seperate the loop out into its own fuction and reuse it allowing me to call it for     each direction and achieve the same effect with less code in tidier fashion
-  ### example 2: resuable loop
+  ### example 2: reusable loop
 
     func spawn_wave(amount, spawn_point, wait_between_waves):
 	    if spawn_point == "north":
