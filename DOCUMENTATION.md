@@ -43,6 +43,25 @@
 		    await get_tree().create_timer(wave_timer).timeout
 
   I also realise this could all be folded into a single line of code if i rename the wave spawn point groups or ensure that the "spawn_point" varaible fed too spawn_wave is the correct string name for the wave spawn groups
+  to do this i renamed the groups in the inspector to simply be north, east, south and west allowing me to create a single loop that got the location the waves needed to be spawned at and then created them.
+	### example 3: merged reusable loop
+
+	func spawn_wave(amount, origin, wait_between_waves):
+	var spawns = get_tree().get_nodes_in_group(origin)
+	var current_wave_number: int = 1 
+	for i in amount:
+		for point in spawns:
+			current_wave_number += 1
+			var new_wave = wave.instantiate()
+			new_wave.global_position = point.global_position
+			add_child(new_wave)
+			new_wave.set_direction(origin)
+			print("Spawning wave at: ", point.name, " wave number: ", current_wave_number)
+			if point == spawns.back():
+				break
+		amount -= 1
+		await get_tree().create_timer(wait_between_waves).timeout
+  
   ## Game Manager
   created to handle damaging collisions with rocks initially, may be removed in later on should I change the rocks to be rigidBodies inorder
   ## Boat
@@ -75,6 +94,8 @@
   originally created to monitor collisions between player and hard obstacles, may eventually repurpose to destroy waves upon leaving the screen or removed entirely
   ## Wave logic
    handles the movement of the waves and their collisions effects, msotly jsut tells the waves to face a point and moves them in that direction
+   this primarily became a palce to determine the direction the waves needed to head and the dictated their direction, I achieved this by creating a class which allowed me to access varaibles and call functions when 
+   spawning in the waves, beasue the waves are being spawned by the a script on Game node this is a perfectly valid way of doing things, I only directly call one specific function to set the direction
   
 # Organisation
   Nodes have been structured relatively freely, grouped the Spawning points for waves into groups based on the cardinal direction they are positioned inorder to locate them via
