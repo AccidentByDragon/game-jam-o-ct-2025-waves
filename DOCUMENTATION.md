@@ -47,20 +47,20 @@
 	### example 3: merged reusable loop
 
 	func spawn_wave(amount, origin, wait_between_waves):
-	var spawns = get_tree().get_nodes_in_group(origin)
-	var current_wave_number: int = 1 
-	for i in amount:
-		for point in spawns:
-			current_wave_number += 1
-			var new_wave = wave.instantiate()
-			new_wave.global_position = point.global_position
-			add_child(new_wave)
-			new_wave.set_direction(origin)
-			print("Spawning wave at: ", point.name, " wave number: ", current_wave_number)
-			if point == spawns.back():
-				break
-		amount -= 1
-		await get_tree().create_timer(wait_between_waves).timeout
+		var spawns = get_tree().get_nodes_in_group(origin)
+		var current_wave_number: int = 1 
+		for i in amount:
+			for point in spawns:
+				current_wave_number += 1
+				var new_wave = wave.instantiate()
+				new_wave.global_position = point.global_position
+				add_child(new_wave)
+				new_wave.set_direction(origin)
+				print("Spawning wave at: ", point.name, " wave number: ", current_wave_number)
+				if point == spawns.back():
+					break
+			amount -= 1
+			await get_tree().create_timer(wait_between_waves).timeout
   
   ## Game Manager
   created to handle damaging collisions with rocks initially, may be removed in later on should I change the rocks to be rigidBodies inorder
