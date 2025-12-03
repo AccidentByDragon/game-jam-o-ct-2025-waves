@@ -90,7 +90,8 @@
 		velocity = transform.x * CurrentSpeed
 		rotation += rotation_direction * rotation_speed * delta
 		move_and_slide()
-  03/12
+	
+  03/12. 
   i decided that the easiest way to handle the collisions for the player colliding with rocks and being hit with waves would be to manage all such thing by the player this also opens the opportunity for me to delete
   the gamemanager i made to handle hp and collisions originally and delegate the collisons to the relevant nodes, such as the boat script and the wave script, for the boat collison i did the following
   ### example 4:
@@ -111,7 +112,8 @@
   
   ## Collison zone 
   originally created to monitor collisions between player and hard obstacles 
-  03/12
+  
+  03/12.
   I eventually repurposed to destroy waves upon leaving the screen and restart the scene if player enters the zones which have been placed at the edges outside the camera bounds
   
   ## Wave logic
