@@ -44,7 +44,8 @@
 
   I also realise this could all be folded into a single line of code if i rename the wave spawn point groups or ensure that the "spawn_point" varaible fed too spawn_wave is the correct string name for the wave spawn groups
   to do this i renamed the groups in the inspector to simply be north, east, south and west allowing me to create a single loop that got the location the waves needed to be spawned at and then created them.
-	### example 3: merged reusable loop
+  
+### example 3: merged reusable loop
 
 	func spawn_wave(amount, origin, wait_between_waves):
 		var spawns = get_tree().get_nodes_in_group(origin)
