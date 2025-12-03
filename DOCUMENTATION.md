@@ -90,13 +90,34 @@
 		velocity = transform.x * CurrentSpeed
 		rotation += rotation_direction * rotation_speed * delta
 		move_and_slide()
-	
+  03/12
+  i decided that the easiest way to handle the collisions for the player colliding with rocks and being hit with waves would be to manage all such thing by the player this also opens the opportunity for me to delete
+  the gamemanager i made to handle hp and collisions originally and delegate the collisons to the relevant nodes, such as the boat script and the wave script, for the boat collison i did the following
+  ### example 4:
+  	func _on_wave_collision_detection_body_entered(body: Node2D) -> void:
+		if body.name.contains("Rock"):
+			print("player has hit ", body.name)
+			player_health = player_health -10
+			print(player_health)
+		elif body.name.contains("Wave"):
+			print("a wave has hit player")
+			var knockback_direction = body.position.direction_to(self.position)
+			print(knockback_direction)
+			velocity = knockback_direction * collision_force # this telports the player rather than sliding them
+			move_and_slide()
+		
+  i did however strike a problem in that the code to kncok the player in the direction the wave was headed teleported the palyer instantly rather than sliding them as i had intended, my current theory is this is due 
+  to using a vector2 for knockback_direction on its own is the cause of the issue
+  
   ## Collison zone 
-  originally created to monitor collisions between player and hard obstacles, may eventually repurpose to destroy waves upon leaving the screen or removed entirely
+  originally created to monitor collisions between player and hard obstacles 
+  03/12
+  I eventually repurposed to destroy waves upon leaving the screen and restart the scene if player enters the zones which have been placed at the edges outside the camera bounds
+  
   ## Wave logic
    handles the movement of the waves and their collisions effects, msotly jsut tells the waves to face a point and moves them in that direction
    this primarily became a palce to determine the direction the waves needed to head and the dictated their direction, I achieved this by creating a class which allowed me to access varaibles and call functions when 
-   spawning in the waves, beasue the waves are being spawned by the a script on Game node this is a perfectly valid way of doing things, I only directly call one specific function to set the direction
+   spawning in the waves, because the waves are being spawned by the a script on Game node this is a perfectly valid way of doing things, I only directly call one specific function to set the direction
   
 # Organisation
   Nodes have been structured relatively freely, grouped the Spawning points for waves into groups based on the cardinal direction they are positioned inorder to locate them via
