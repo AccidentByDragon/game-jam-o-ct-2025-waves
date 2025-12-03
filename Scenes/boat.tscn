@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjcddy4k747mi"]
+[gd_scene load_steps=5 format=3 uid="uid://cjcddy4k747mi"]
 
 [ext_resource type="Texture2D" uid="uid://cg2jc2idqnxek" path="res://Assets/boat.png" id="1_d82p8"]
 [ext_resource type="Script" uid="uid://dqh7ypq27dx2i" path="res://Scripts/boat.gd" id="1_g7r5y"]
@@ -6,9 +6,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
 size = Vector2(1022, 340)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g7r5y"]
+size = Vector2(1065, 371)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 3
-collision_mask = 2
+collision_mask = 3
 script = ExtResource("1_g7r5y")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -17,3 +20,11 @@ texture = ExtResource("1_d82p8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 0)
 shape = SubResource("RectangleShape2D_cvnsp")
+
+[node name="Wave Collision detection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wave Collision detection"]
+position = Vector2(-1.5, 0.5)
+shape = SubResource("RectangleShape2D_g7r5y")
+
+[connection signal="body_entered" from="Wave Collision detection" to="." method="_on_wave_collision_detection_body_entered"]

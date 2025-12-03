@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 class_name waveThreat
-enum Direction {north, east, south, west}
+enum direction {north, east, south, west}
 var current_direction: String
 
 const speed: float = 250.0
@@ -30,3 +30,7 @@ func set_direction(direction_string):
 		"west":
 			dir.x = 1
 			current_direction = direction_string
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.name.contains("rock"):
+		pass

@@ -1,4 +1,4 @@
 extends Node
 
-func hard_collision(colliding_object: Node2D):
+func hard_collision():
 	print("collion detected")
