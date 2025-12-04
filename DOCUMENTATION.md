@@ -4,7 +4,8 @@
 # Scripts & Code
   ## Game
   Code in the game section handles Spawning of waves and  some basic timers logic, before settling on how to manage collisons with wave I had planned to handle it hear
-  I am paritcularly pleased with the wave spawning functions as the guide I was orignally followed was a very simplistic version that went by each spawn point node by node with variables for each node and wave that was spawned at the node inside the For loop,
+  I am paritcularly pleased with the wave spawning functions as the guide I was orignally followed was a very simplistic version that went by each spawn point node by node with variables for each node and wave that 
+  was spawned at the node inside the For loop,
   I quickly realised a for loop could achieve this effect and be more resuable
  ### example 1: guide code (shortened for simplicity)
  
@@ -14,7 +15,8 @@
       var wave2 = wave.instatiate()
       wave2.global_position = wave_spawn2.global_position
       ....
-  I decided to replace this with a nested for loop that used the "get_nodes_in_group" and the groups i organised the spawns points with to more cleanly spawn the waves, later ealised i could seperate the loop out into its own fuction and reuse it allowing me to call it for     each direction and achieve the same effect with less code in tidier fashion
+  I decided to replace this with a nested for loop that used the "get_nodes_in_group" and the groups i organised the spawns points with to more cleanly spawn the waves, later ealised i could seperate the loop out into its 
+  own fuction and reuse it allowing me to call it for each direction and achieve the same effect with less code in tidier fashion
   ### example 2: reusable loop
 
     func spawn_wave(amount, spawn_point, wait_between_waves):
@@ -62,9 +64,12 @@
 					break
 			amount -= 1
 			await get_tree().create_timer(wait_between_waves).timeout
+
+04/12 added a litle _process and choose() dunctions to allow randomisation of wave orign and spawning new waves when previous waves are deleted
   
   ## Game Manager
   created to handle damaging collisions with rocks initially, may be removed in later on should I change the rocks to be rigidBodies inorder
+  04/12 deleted along with rock.gd as it was no longer needed
   ## Boat
   created to manage palyer input and velocity, made speed and turing variables exports inorder ot easily handle them in the inspector,
   the code is designed to allow the palyer to gradually accelerate up to their max speed and only slow down if the palyer brakes or to slowly slow down while not accelrating,
@@ -90,7 +95,7 @@
 		velocity = transform.x * CurrentSpeed
 		rotation += rotation_direction * rotation_speed * delta
 		move_and_slide()
-	
+
   03/12. 
   i decided that the easiest way to handle the collisions for the player colliding with rocks and being hit with waves would be to manage all such thing by the player this also opens the opportunity for me to delete
   the gamemanager i made to handle hp and collisions originally and delegate the collisons to the relevant nodes, such as the boat script and the wave script, for the boat collison i did the following
@@ -109,9 +114,53 @@
 		
   i did however strike a problem in that the code to kncok the player in the direction the wave was headed teleported the palyer instantly rather than sliding them as i had intended, my current theory is this is due 
   to using a vector2 for knockback_direction on its own is the cause of the issue
+
+  04/12.
+  managed to find a solution to previous problems by changing the colision detection to the following
+
+  ### example 5: colision detection
+  
+  	func _on_wave_collision_detection_body_entered(body: Node2D) -> void:
+		if body.name.contains("Rock"):
+			print("player has hit ", body.name)
+			player_health = player_health -10
+			print(player_health)
+		elif body.name.contains("Wave"):
+			print("a wave has hit player")
+			curent_speed = collision_force
+			if curent_speed <= 0:
+				is_knocked_back = false
+			else:
+				is_knocked_back = true
+
+  updated the _physics_process to allow this to move the player, however the current method does not slow down over time as is desired
+  ### example 6: _physics_process with knockbacks
+  	func _physics_process(delta: float) -> void:
+		#move forward in facing direction
+		rotation_direction = Input.get_axis("turn_left", "turn_right")
+		if Input.is_action_pressed("move_forward"):
+			curent_speed += 50.0
+			if curent_speed > max_speed:
+				curent_speed = max_speed
+		if Input.is_action_pressed("slow_movement"):
+			curent_speed -= 50.0
+			if curent_speed < -200:
+				curent_speed = -200
+		curent_speed -= deceleration_speed * delta
+		if curent_speed < 0:
+			curent_speed = 0
+		if is_knocked_back == true:
+			for index in get_slide_collision_count():
+				var collision: KinematicCollision2D = get_slide_collision(index)
+				if collision.get_collider().name.contains("Wave"):
+					velocity = collision.get_normal()*curent_speed # this combined with how we disable colisions is a problem
+		elif is_knocked_back != true:
+			velocity = transform.x * curent_speed # the transform.x is causing us issues with knockback
+			rotation += rotation_direction * rotation_speed * delta
+		move_and_slide()
   
   ## Collison zone 
-  originally created to monitor collisions between player and hard obstacles 
+  originally created to monitor collisions between player and hard obstacles
   
   03/12.
   I eventually repurposed to destroy waves upon leaving the screen and restart the scene if player enters the zones which have been placed at the edges outside the camera bounds
