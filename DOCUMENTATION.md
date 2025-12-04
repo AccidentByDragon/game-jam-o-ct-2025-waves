@@ -70,11 +70,14 @@
   ## Game Manager
   created to handle damaging collisions with rocks initially, may be removed in later on should I change the rocks to be rigidBodies inorder
   04/12 deleted along with rock.gd as it was no longer needed
-  ## Boat
+  
+  ## Boat/Player
   created to manage palyer input and velocity, made speed and turing variables exports inorder ot easily handle them in the inspector,
   the code is designed to allow the palyer to gradually accelerate up to their max speed and only slow down if the palyer brakes or to slowly slow down while not accelrating,
   this is achieved by making "velocity = transform.x * currentspeed" this allows the speed to increase over time and be applied in the direction of facing, this results in the player drifting around in the game,
   will likely attempt to make a way to slow the players non forward momentum more quickly than forward momentum reduction
+
+  ### example 4: basic movement version of _physics_process
 
   	func _physics_process(delta: float) -> void:
 		#move forward in facing direction
@@ -99,7 +102,7 @@
   03/12. 
   i decided that the easiest way to handle the collisions for the player colliding with rocks and being hit with waves would be to manage all such thing by the player this also opens the opportunity for me to delete
   the gamemanager i made to handle hp and collisions originally and delegate the collisons to the relevant nodes, such as the boat script and the wave script, for the boat collison i did the following
-  ### example 4:
+  ### example 5: Initial collison detection for boat/player
   	func _on_wave_collision_detection_body_entered(body: Node2D) -> void:
 		if body.name.contains("Rock"):
 			print("player has hit ", body.name)
@@ -118,7 +121,7 @@
   04/12.
   managed to find a solution to previous problems by changing the colision detection to the following
 
-  ### example 5: colision detection
+  ### example 6: colision detection
   
   	func _on_wave_collision_detection_body_entered(body: Node2D) -> void:
 		if body.name.contains("Rock"):
@@ -134,7 +137,7 @@
 				is_knocked_back = true
 
   updated the _physics_process to allow this to move the player, however the current method does not slow down over time as is desired
-  ### example 6: _physics_process with knockbacks
+  ### example 7: _physics_process with knockbacks
   	func _physics_process(delta: float) -> void:
 		#move forward in facing direction
 		rotation_direction = Input.get_axis("turn_left", "turn_right")
