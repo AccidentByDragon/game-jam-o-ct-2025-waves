@@ -32,5 +32,6 @@ func set_direction(direction_string):
 			current_direction = direction_string
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.name.contains("rock"):
-		pass
+	if body.name.contains("Wave") != true:
+		await get_tree().create_timer(0.5).timeout
+		queue_free()

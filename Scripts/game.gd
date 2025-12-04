@@ -16,13 +16,18 @@ func _ready():
 	current_nodes = get_child_count()
 	position_to_next_wave()
 
+func _process(delta: float) -> void:
+	current_nodes = get_child_count()
+	if wave_spawn_ended == true:
+		position_to_next_wave()
+
 func position_to_next_wave():
-	print(current_wave)
 	if current_nodes == starting_nodes:
-		current_wave += 1		
+		wave_spawn_ended = false
+		current_wave += 1
 		await get_tree().create_timer(0.5).timeout
-		prepare_spawn("east", 2.0, 1.0) #Origin of waves, Number of "waves",  time between waves
-		print(current_wave)
+		var wave_origin = choose(["north", "east", "south", "west"])
+		prepare_spawn(wave_origin, current_wave* 1.0, 2.0) #Origin of waves, Number of "waves",  time between waves
 
 func prepare_spawn(origin, multiplier, timeBetween):
 	var wave_amount = float(current_wave) * multiplier
@@ -48,10 +53,12 @@ func spawn_wave(amount, origin, wait_between_waves):
 		## this orignally would go through the spawn point swithout a for loop so would have each spawnpoint have its own variable
 		## and then spawn a wave add it trhough its own variable, i replaced this with a for loop that utilised get_nodes_in_group to make a cleaner code
 		## that achieved the same effect.
+	wave_spawn_ended = true
 
 func _on_timer_timeout() -> void:
 	get_tree().reload_current_scene()
 	Engine.time_scale = 1.0
 
-func bounceOnCollision():
-	pass
+func choose(array):
+	array.shuffle()
+	return array.front()

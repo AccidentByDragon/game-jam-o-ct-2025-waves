@@ -6,8 +6,12 @@ extends CharacterBody2D
 @export var rotation_speed = 1.5
 var curent_speed: float
 var rotation_direction = 0
-const collision_force: float = 15000.0
+const collision_force: float = 500.0
 var player_health = 100
+var is_knocked_back: bool = false
+
+#var knockback_direction = Vector2()
+#var knockback_wait = 10
 
 func _physics_process(delta: float) -> void:
 	#move forward in facing direction
@@ -20,13 +24,17 @@ func _physics_process(delta: float) -> void:
 		curent_speed -= 50.0
 		if curent_speed < -200:
 			curent_speed = -200
-	else:
-		curent_speed -= deceleration_speed * delta
-		if curent_speed < 0:
-			curent_speed = 0
-
-	velocity = transform.x * curent_speed
-	rotation += rotation_direction * rotation_speed * delta
+	curent_speed -= deceleration_speed * delta
+	if curent_speed < 0:
+		curent_speed = 0
+	if is_knocked_back == true:
+		for index in get_slide_collision_count():
+			var collision: KinematicCollision2D = get_slide_collision(index)
+			if collision.get_collider().name.contains("Wave"):
+				velocity = collision.get_normal()*curent_speed # this combined with how we disable colisions is a problem
+	elif is_knocked_back != true:
+		velocity = transform.x * curent_speed # the transform.x is causing us issues with knockback
+		rotation += rotation_direction * rotation_speed * delta
 	move_and_slide()
 
 
@@ -37,7 +45,16 @@ func _on_wave_collision_detection_body_entered(body: Node2D) -> void:
 		print(player_health)
 	elif body.name.contains("Wave"):
 		print("a wave has hit player")
-		var knockback_direction = body.position.direction_to(self.position)
-		print(knockback_direction)
-		velocity = knockback_direction * collision_force # this telports the player rather than sliding them
-		move_and_slide()
+		curent_speed = collision_force
+		if curent_speed <= 0:
+			is_knocked_back = false
+		else:
+			is_knocked_back = true
+		#var knockback_direction = body.position.direction_to(self.position)
+		#print(knockback_direction)
+		#velocity = knockback_direction * collision_force # this telports the player rather than sliding them
+		# tried this, still no luck
+		#if knockback_direction.x !=0:
+			#velocity = transform.x * collision_force 
+		#elif knockback_direction.y != 0:
+			#velocity = transform.y * collision_force 
