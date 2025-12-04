@@ -102,7 +102,7 @@
   03/12. 
   i decided that the easiest way to handle the collisions for the player colliding with rocks and being hit with waves would be to manage all such thing by the player this also opens the opportunity for me to delete
   the gamemanager i made to handle hp and collisions originally and delegate the collisons to the relevant nodes, such as the boat script and the wave script, for the boat collison i did the following
-  ### example 5: Initial collison detection for boat/player
+  ### example 5: Initial collision detection for boat/player
   	func _on_wave_collision_detection_body_entered(body: Node2D) -> void:
 		if body.name.contains("Rock"):
 			print("player has hit ", body.name)
@@ -121,7 +121,7 @@
   04/12.
   managed to find a solution to previous problems by changing the colision detection to the following
 
-  ### example 6: colision detection
+  ### example 6: collision detection
   
   	func _on_wave_collision_detection_body_entered(body: Node2D) -> void:
 		if body.name.contains("Rock"):
