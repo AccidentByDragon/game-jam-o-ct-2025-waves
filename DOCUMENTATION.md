@@ -166,6 +166,8 @@
   05/12.
   solved the collision issue by restructuring the code and allowing the collison to be stopped before the code, their are still some buggy behaviours in the code, however I am not sure how to sovle this with my 
   current understanding of Godot the physics engine.
+  I am aware that the way I Handle the forward momentum is the reaosn the knockback and movement is buggy, however I am a little unsure how to solve this, it may be possible to solve it with a few tweaks to the movement by
+  applying move_towards in the movement and replacing the forward and slow momentum if statements, will expereiment in alternat branches
   ### Figure 8: functional iteration of _physics_process
   	func _physics_process(delta: float) -> void:
 		#move forward in facing direction
