@@ -9,6 +9,7 @@ var rotation_direction = 0
 const collision_force: float = 250.0
 var player_health = 100
 var is_knocked_back: bool = false
+var game_over: bool = false
 
 #var knockback_direction = Vector2()
 #var knockback_wait = 10
@@ -28,7 +29,7 @@ func _physics_process(delta: float) -> void:
 		curent_speed -= deceleration_speed * delta
 		if curent_speed < 0:
 			curent_speed = 0
-			is_knocked_back = false # this solved our issue as it gives us a chnace to disable the shove
+			is_knocked_back = false # this solved our issue as it gives us a chance to disable the shove
 	if is_knocked_back == true:
 		for index in get_slide_collision_count():
 			var collision: KinematicCollision2D = get_slide_collision(index)
@@ -44,17 +45,18 @@ func _on_wave_collision_detection_body_entered(body: Node2D) -> void:
 	if body.name.contains("Rock"):
 		print("player has hit ", body.name)
 		player_health = player_health -25
+		health_check()
 		print(player_health)
 	elif body.name.contains("Wave"):
 		print("a wave has hit player")
 		player_health = player_health -10
+		health_check()
 		curent_speed = collision_force
 		is_knocked_back = true
-		#var knockback_direction = body.position.direction_to(self.position)
-		#print(knockback_direction)
-		#velocity = knockback_direction * collision_force # this telports the player rather than sliding them
-		# tried this, still no luck
-		#if knockback_direction.x !=0:
-			#velocity = transform.x * collision_force 
-		#elif knockback_direction.y != 0:
-			#velocity = transform.y * collision_force 
+
+func health_check():
+	if game_over == false and player_health <= 0:
+		player_health = 0
+		game_over = true
+		queue_free()
+		get_tree().reload_current_scene()
