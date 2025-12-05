@@ -59,4 +59,4 @@ func health_check():
 		player_health = 0
 		game_over = true
 		queue_free()
-		get_tree().reload_current_scene()
+		get_tree().change_scene_to_file.call_deferred("res://Scenes/inGameMenu.tscn")

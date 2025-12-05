@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=3 uid="uid://dmfb8knklqarp"]
+
+[ext_resource type="Script" uid="uid://bfbietyfroetu" path="res://Scripts/main_menu.gd" id="1_totuj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_totuj"]
+bg_color = Color(0.9079417, 0.9079417, 0.90794164, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hcxxy"]
+bg_color = Color(0.7919991, 0.79199916, 0.7919991, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ur25d"]
+bg_color = Color(0.9079417, 0.9079417, 0.90794164, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.4745098)
+shadow_size = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ur25d"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_totuj")
+
+[node name="Start_game_button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.5
+offset_top = -49.0
+offset_right = 178.5
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_totuj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hcxxy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ur25d")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ur25d")
+text = "Start Game"
+
+[node name="Exit_button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4986979
+anchor_top = 0.7453704
+anchor_right = 0.4986979
+anchor_bottom = 0.7453704
+offset_left = -178.5
+offset_top = -98.0
+offset_right = 178.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_totuj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hcxxy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ur25d")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ur25d")
+text = "Exit
+ Game"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Start_game_button" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="Exit_button" to="." method="_on_exit_button_pressed"]
