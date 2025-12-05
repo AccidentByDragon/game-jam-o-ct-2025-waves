@@ -68,11 +68,11 @@
 04/12 added a litle _process and choose() dunctions to allow randomisation of wave orign and spawning new waves when previous waves are deleted
   
   ## Game Manager
-  created to handle damaging collisions with rocks initially, may be removed in later on should I change the rocks to be rigidBodies inorder
+  Created to handle damaging collisions with rocks initially, may be removed in later on should I change the rocks to be rigidBodies inorder
   04/12 deleted along with rock.gd as it was no longer needed
   
   ## Boat/Player
-  created to manage player input and velocity, made speed and turing variables exports inorder ot easily handle them in the inspector,
+  Created to manage player input and velocity, made speed and turing variables exports inorder to easily handle them in the inspector,
   the code is designed to allow the palyer to gradually accelerate up to their max speed and only slow down if the palyer brakes or to slowly slow down while not accelrating,
   this is achieved by making "velocity = transform.x * currentspeed" this allows the speed to increase over time and be applied in the direction of facing, this results in the player drifting around in the game,
   will likely attempt to make a way to slow the players non forward momentum more quickly than forward momentum reduction
@@ -100,7 +100,7 @@
 		move_and_slide()
 
   03/12. 
-  i decided that the easiest way to handle the collisions for the player colliding with rocks and being hit with waves would be to manage all such thing by the player this also opens the opportunity for me to delete
+  I decided that the easiest way to handle the collisions for the player colliding with rocks and being hit with waves would be to manage all such thing by the player this also opens the opportunity for me to delete
   the gamemanager i made to handle hp and collisions originally and delegate the collisons to the relevant nodes, such as the boat script and the wave script, for the boat collison i did the following
   ### Figure 5: Initial collision detection for boat/player
   	func _on_wave_collision_detection_body_entered(body: Node2D) -> void:
@@ -115,7 +115,7 @@
 			velocity = knockback_direction * collision_force # this telports the player rather than sliding them
 			move_and_slide()
 		
-  i did however strike a problem in that the code to kncok the player in the direction the wave was headed teleported the palyer instantly rather than sliding them as i had intended, my current theory is this is due 
+  I did however strike a problem in that the code to kncok the player in the direction the wave was headed teleported the palyer instantly rather than sliding them as i had intended, my current theory is this is due 
   to using a vector2 for knockback_direction on its own is the cause of the issue
 
   04/12.
@@ -165,9 +165,9 @@
 
   05/12.
   solved the collision issue by restructuring the code and allowing the collison to be stopped before the code, their are still some buggy behaviours in the code, however I am not sure how to sovle this with my 
-  current understanding of Godot the physics engine.
-  I am aware that the way I Handle the forward momentum is the reaosn the knockback and movement is buggy, however I am a little unsure how to solve this, it may be possible to solve it with a few tweaks to the movement by
-  applying move_towards in the movement and replacing the forward and slow momentum if statements, will expereiment in alternat branches
+  current understanding of Godot the physics engine.I am aware that the way I Handle the forward momentum is the reaosn the knockback and movement is buggy,
+  it may be possible to solve it with a few tweaks to the movement by applying move_towards in the movement and replacing the forward and slow momentum if statements, will expereiment in a new branch after creating option 
+  and instruction sections of main menu.
   ### Figure 8: functional iteration of _physics_process
   	func _physics_process(delta: float) -> void:
 		#move forward in facing direction
