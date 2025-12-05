@@ -72,7 +72,7 @@
   04/12 deleted along with rock.gd as it was no longer needed
   
   ## Boat/Player
-  created to manage palyer input and velocity, made speed and turing variables exports inorder ot easily handle them in the inspector,
+  created to manage player input and velocity, made speed and turing variables exports inorder ot easily handle them in the inspector,
   the code is designed to allow the palyer to gradually accelerate up to their max speed and only slow down if the palyer brakes or to slowly slow down while not accelrating,
   this is achieved by making "velocity = transform.x * currentspeed" this allows the speed to increase over time and be applied in the direction of facing, this results in the player drifting around in the game,
   will likely attempt to make a way to slow the players non forward momentum more quickly than forward momentum reduction
