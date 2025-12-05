@@ -5,3 +5,11 @@
 ## Game Off 2025
 Game Off is an annual game jam challenging individuals and teams to build a game during the month of November. Use whatever programming languages, game engines, or libraries you like. 
 This year's theme is WAVES. 
+
+## Reflection and Thoughts
+I learned a fair amount on Godot and its 2d functions, it may however have been mistake to launch myself into a project that involved the physics engine so much immediatly
+
+
+## TODO
+1. Add controlls and isntructions point in main menu
+2. attmept to fix the collision knockback bugs
