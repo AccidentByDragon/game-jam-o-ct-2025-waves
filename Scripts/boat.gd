@@ -7,9 +7,13 @@ extends CharacterBody2D
 var curent_speed: float
 var rotation_direction = 0
 const collision_force: float = 250.0
-var player_health = 100
 var is_knocked_back: bool = false
 var game_over: bool = false
+var recent_collision = false
+
+var health_max = 100
+var health_min = 0
+var health = 100
 
 #var knockback_direction = Vector2()
 #var knockback_wait = 10
@@ -42,21 +46,21 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_wave_collision_detection_body_entered(body: Node2D) -> void:
-	if body.name.contains("Rock"):
-		print("player has hit ", body.name)
-		player_health = player_health -25
+	if body.name.contains("Rock") and recent_collision == false:
+		recent_collision = true
+		health = health -25
 		health_check()
-		print(player_health)
+		await get_tree().create_timer(0.5).timeout
+		recent_collision = false
 	elif body.name.contains("Wave"):
-		print("a wave has hit player")
-		player_health = player_health -10
+		health = health -10
 		health_check()
 		curent_speed = collision_force
 		is_knocked_back = true
 
 func health_check():
-	if game_over == false and player_health <= 0:
-		player_health = 0
+	if game_over == false and health <= health_min:
+		health = health_min
 		game_over = true
 		queue_free()
 		get_tree().change_scene_to_file.call_deferred("res://Scenes/inGameMenu.tscn")

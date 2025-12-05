@@ -4,10 +4,8 @@ var game_over: bool = false
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.name.contains("Wave"):
-		print("deleting ", body.name)
 		body.queue_free()
 	elif body.name.contains("Player"):
-		print("you left the scene")
 		game_over = true
 		body.queue_free()
 		end_game()

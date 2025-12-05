@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjcddy4k747mi"]
+[gd_scene load_steps=6 format=3 uid="uid://cjcddy4k747mi"]
 
 [ext_resource type="Texture2D" uid="uid://cg2jc2idqnxek" path="res://Assets/boat.png" id="1_d82p8"]
 [ext_resource type="Script" uid="uid://dqh7ypq27dx2i" path="res://Scripts/boat.gd" id="1_g7r5y"]
+[ext_resource type="PackedScene" uid="uid://ym1khmxjeat5" path="res://Scenes/health_bar.tscn" id="3_badgh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
 size = Vector2(1022, 340)
@@ -26,5 +27,11 @@ shape = SubResource("RectangleShape2D_cvnsp")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wave Collision detection"]
 position = Vector2(-1.5, 0.5)
 shape = SubResource("RectangleShape2D_g7r5y")
+
+[node name="HealthBar" parent="." instance=ExtResource("3_badgh")]
+offset_left = -501.0
+offset_top = 179.0
+offset_right = 507.0
+offset_bottom = 206.0
 
 [connection signal="body_entered" from="Wave Collision detection" to="." method="_on_wave_collision_detection_body_entered"]
