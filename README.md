@@ -11,5 +11,7 @@ I learned a fair amount on Godot and its 2d functions, it may however have been 
 
 
 ## TODO
-1. Add controls and instructions point in main menu
-2. attmept to fix the collision knockback bugs
+~~1. Add controls and instructions point in main menu~~
+## Optional
+1. add scoring system
+2. attempt to fix the collision knockback bugs
