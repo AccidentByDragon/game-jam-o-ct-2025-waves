@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmfb8knklqarp"]
+[gd_scene load_steps=9 format=3 uid="uid://dmfb8knklqarp"]
 
 [ext_resource type="Script" uid="uid://bfbietyfroetu" path="res://Scripts/main_menu.gd" id="1_totuj"]
 
@@ -29,6 +29,30 @@ shadow_size = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ur25d"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eotax"]
+bg_color = Color(0.9079417, 0.9079417, 0.90794164, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_udm2q"]
+bg_color = Color(0.9079417, 0.9079417, 0.90794164, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjet1"]
+bg_color = Color(0.9079417, 0.9079417, 0.90794164, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 8
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -40,15 +64,15 @@ script = ExtResource("1_totuj")
 
 [node name="Start_game_button" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.455
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -178.5
-offset_top = -49.0
-offset_right = 178.5
-offset_bottom = 49.0
+anchor_bottom = 0.455
+offset_left = -178.0
+offset_top = -105.84
+offset_right = 179.0
+offset_bottom = -7.8399963
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -62,6 +86,29 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_hcxxy")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ur25d")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ur25d")
 text = "Start Game"
+
+[node name="Help_button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -181.0
+offset_top = -28.0
+offset_right = 178.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_eotax")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_udm2q")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mjet1")
+text = "Help"
 
 [node name="Exit_button" type="Button" parent="."]
 layout_mode = 1
@@ -90,4 +137,5 @@ text = "Exit
 metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Start_game_button" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="Help_button" to="." method="_on_help_button_pressed"]
 [connection signal="pressed" from="Exit_button" to="." method="_on_exit_button_pressed"]

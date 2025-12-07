@@ -1,0 +1,94 @@
+[gd_scene load_steps=7 format=3 uid="uid://cmuuhlltjg0u5"]
+
+[ext_resource type="Script" uid="uid://bpp32abe22a6s" path="res://help_menu.gd" id="1_bd5d3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0d1c8"]
+bg_color = Color(0.9079417, 0.9079417, 0.90794164, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l8lul"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qrul"]
+bg_color = Color(0.7919991, 0.79199916, 0.7919991, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gmxrm"]
+bg_color = Color(0.9098039, 0.9098039, 0.9098039, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xo4nt"]
+
+[node name="HelpMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bd5d3")
+
+[node name="Instructions" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -198.0
+offset_top = -186.5
+offset_right = 198.0
+offset_bottom = 186.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_0d1c8")
+text = "Last as long as you can, 	avoid rocks and waves.
+Use W and S to accelerate and brake, Steer with A and D, Good Luck!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Return_Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -137.0
+offset_top = -124.0
+offset_right = 138.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_l8lul")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8qrul")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gmxrm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xo4nt")
+text = "Return to Menu"
+
+[connection signal="pressed" from="Return_Button" to="." method="_on_return_button_pressed"]
