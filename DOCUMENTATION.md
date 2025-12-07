@@ -1,6 +1,17 @@
 
 # General
+As mentioned in the readme I made this inspired by a Game jam, the goal was to expand my knowledge of Godot and GDScript  and get back into game dev.
+07/12
+having added a help and menus I am feeling that the projects is mostly finished i would like to add a score keeping system and try and fix the slightly buggy behaviour of the movement, the Score system by my estimates 
+wouldn't be too hard merely require the creation of global script to store scores during the game being open, however i am unsure how to go about keeping the scores saved between game sessions
+fixing the odd movement behaviour will either be a simple matter or require me to rewrite the movement as a result i ahve decided to create a seperate branch inorder to play around with the score systems and movement bugs
 
+## Branches
+Main is the orignal branch where i did most of the work, as of 07/12 I have decided ot create a seperate branch for future development this is primaliry due to my uncertainty around how to fix the movement bugs
+rather than the score system, it is hwoever good practice that I have been neglecting to follow previously
+## Organisation
+  Nodes have been structured relatively freely, grouped the Spawning points for waves into groups based on the cardinal direction they are positioned inorder to locate them via
+  a For loop in script, in the Node tree all waves spawn points are gathered under a "SpawnPoints" parent node to keep tree clearer
 # Scripts & Code
   ## Game
   Code in the game section handles Spawning of waves and  some basic timers logic, before settling on how to manage collisons with wave I had planned to handle it hear
@@ -223,9 +234,10 @@
    spawning in the waves, because the waves are being spawned by the a script on Game node this is a perfectly valid way of doing things, I only directly call one specific function to set the direction
 
 ## Main menu and in Game menu
-these two are fairly straight forward in that they are designed to allow a player to start/restart the game, exit to menu or quit entirely by calling the scene_tree
+these two are fairly straight forward in that they are designed to allow a player to start/restart the game, exit to menu or quit entirely by calling the scene_tree, as this is done by signals and simple 
+scene tree interactions so i won't delve into it
+07/12
+added a "Help" menu with instructions
   
-# Organisation
-  Nodes have been structured relatively freely, grouped the Spawning points for waves into groups based on the cardinal direction they are positioned inorder to locate them via
-  a For loop in script, in the Node tree all waves spawn points are gathered under a "SpawnPoints" parent node to keep tree clearer
-  
+
+
