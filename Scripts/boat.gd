@@ -62,5 +62,7 @@ func health_check():
 	if game_over == false and health <= health_min:
 		health = health_min
 		game_over = true
+		signal_game_over.emit()
 		queue_free()
-		get_tree().change_scene_to_file.call_deferred("res://Scenes/inGameMenu.tscn")
+
+signal signal_game_over()
