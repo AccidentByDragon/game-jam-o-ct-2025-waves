@@ -8,6 +8,7 @@ var current_wave: int
 
 var starting_nodes: int
 var current_nodes: int
+var cur_score: int
 var wave_spawn_ended
 
 func _ready():
@@ -54,6 +55,7 @@ func spawn_wave(amount, origin, wait_between_waves):
 		## and then spawn a wave add it trhough its own variable, i replaced this with a for loop that utilised get_nodes_in_group to make a cleaner code
 		## that achieved the same effect.
 	wave_spawn_ended = true
+	cur_score += 100
 
 func _on_timer_timeout() -> void:
 	get_tree().reload_current_scene()
@@ -62,3 +64,10 @@ func _on_timer_timeout() -> void:
 func choose(array):
 	array.shuffle()
 	return array.front()
+
+
+func _on_player_signal_game_over() -> void:
+	Global.previous_score = cur_score
+	if cur_score > Global.high_score:
+		Global.high_score = cur_score
+	get_tree().change_scene_to_file.call_deferred("res://Scenes/inGameMenu.tscn")
