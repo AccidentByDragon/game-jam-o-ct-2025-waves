@@ -239,5 +239,8 @@ scene tree interactions so i won't delve into it
 07/12
 added a "Help" menu with instructions
   
-
+## Score and Scoresystem
+08/12.
+Adding this late(11/12 i forgot earlier), added a simple score system relying on the use of global script, to add 100 score after survivng a wave and then save as a high score if it is higher than previous score; 
+currently this is reset on restarting the game.
 
